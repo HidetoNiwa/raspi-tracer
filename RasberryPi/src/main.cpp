@@ -1,12 +1,9 @@
-#include "includes.h"
-#include "foot.h"
-#include "motor.h"
 #include "main.h"
-
-foot foots();
-
+#include "foot.h"
 int main()
 {
+    foot foots; //足回り動作定義
+
     cv::VideoCapture cap(0); //デバイスのオープン
 
     if (!cap.isOpened()) //カメラデバイスが正常にオープンしたか確認．
@@ -19,7 +16,7 @@ int main()
     while (1)
     {
         cv::imshow("Picture", frame);
-        foots.out(1, 1, 0);
+        foots.out(1.f, 1.f, 0.f);
     }
 
     return 0;

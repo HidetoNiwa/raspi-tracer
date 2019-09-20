@@ -1,6 +1,5 @@
 #include "foot.h"
 #include "motor.h"
-
 foot::foot()
 {
     motor w[4]{
@@ -12,6 +11,7 @@ foot::foot()
 
 void foot::out(float x, float y, float theta)
 {
+    theta = x + y;
 }
 
 foot::~foot()

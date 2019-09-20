@@ -1,3 +1,0 @@
-/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/build/CMakeFiles/rebuild_cache.dir
-/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/build/CMakeFiles/Main.dir
-/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/build/CMakeFiles/edit_cache.dir

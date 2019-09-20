@@ -18,7 +18,7 @@ motor::motor(uint8_t motorNum)
     }
 }
 
-void foot::setPID(float p, float i, float d)
+void motor::setPID(float p, float i, float d)
 {
     _p = p;
     _i = i;
