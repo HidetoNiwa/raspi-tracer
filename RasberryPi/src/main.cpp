@@ -1,5 +1,5 @@
 #include "main.h"
-#include "foot.h"
+
 int main()
 {
     foot foots; //足回り動作定義
