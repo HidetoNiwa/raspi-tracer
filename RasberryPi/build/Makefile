@@ -123,33 +123,6 @@ Main/fast:
 	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/build
 .PHONY : Main/fast
 
-src/foot.o: src/foot.cpp.o
-
-.PHONY : src/foot.o
-
-# target to build an object file
-src/foot.cpp.o:
-	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/src/foot.cpp.o
-.PHONY : src/foot.cpp.o
-
-src/foot.i: src/foot.cpp.i
-
-.PHONY : src/foot.i
-
-# target to preprocess a source file
-src/foot.cpp.i:
-	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/src/foot.cpp.i
-.PHONY : src/foot.cpp.i
-
-src/foot.s: src/foot.cpp.s
-
-.PHONY : src/foot.s
-
-# target to generate assembly for a file
-src/foot.cpp.s:
-	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/src/foot.cpp.s
-.PHONY : src/foot.cpp.s
-
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -186,9 +159,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Main"
 	@echo "... edit_cache"
-	@echo "... src/foot.o"
-	@echo "... src/foot.i"
-	@echo "... src/foot.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

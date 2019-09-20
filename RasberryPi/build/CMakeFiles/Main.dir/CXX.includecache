@@ -6,19 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.cpp
-foot.hpp
-/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.hpp
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.h
+includes.h
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/includes.h
 
-/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.hpp
-
-/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/main.cpp
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/includes.h
+stdint.h
+-
 stdio.h
 -
 opencv2/opencv.hpp
 -
-foot.hpp
-/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.hpp
+
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/main.cpp
+includes.h
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/includes.h
+foot.h
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.h
+motor.h
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/motor.h
+main.h
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/main.h
+
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/main.h
+includes.h
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/includes.h
+
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/motor.h
+includes.h
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/includes.h
 
 /usr/local/include/opencv4/opencv2/calib3d.hpp
 opencv2/core.hpp

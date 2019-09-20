@@ -1,11 +1,13 @@
-#include <stdio.h>
-#include <opencv2/opencv.hpp>
-#include "foot.hpp"
+#include "includes.h"
+#include "foot.h"
+#include "motor.h"
+#include "main.h"
+
+foot foots();
 
 int main()
 {
     cv::VideoCapture cap(0); //デバイスのオープン
-    //cap.open(0);//こっちでも良い．
 
     if (!cap.isOpened()) //カメラデバイスが正常にオープンしたか確認．
     {
@@ -14,10 +16,10 @@ int main()
     }
 
     cv::Mat frame;
-
     while (1)
     {
         cv::imshow("Picture", frame);
+        foots.out(1, 1, 0);
     }
 
     return 0;

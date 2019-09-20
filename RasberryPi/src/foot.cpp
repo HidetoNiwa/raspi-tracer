@@ -1,5 +1,19 @@
-#include "foot.hpp"
-void motor(uint8_t motorNum)
+#include "foot.h"
+#include "motor.h"
+
+foot::foot()
 {
-    printf("%d", motorNum)
+    motor w[4]{
+        motor(0),
+        motor(1),
+        motor(2),
+        motor(3)};
+}
+
+void foot::out(float x, float y, float theta)
+{
+}
+
+foot::~foot()
+{
 }

@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.cpp" "/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/build/CMakeFiles/Main.dir/src/foot.cpp.o"
   "/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/main.cpp" "/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/build/CMakeFiles/Main.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
