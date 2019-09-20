@@ -1,0 +1,3 @@
+/home/hidetoniwa/Desktop/RasberryPi/build/CMakeFiles/rebuild_cache.dir
+/home/hidetoniwa/Desktop/RasberryPi/build/CMakeFiles/Main.dir
+/home/hidetoniwa/Desktop/RasberryPi/build/CMakeFiles/edit_cache.dir
