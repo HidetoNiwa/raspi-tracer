@@ -9,9 +9,11 @@ add_definitions(-DRESOURCE_DIR="${PROJECT_BINARY_DIR}/resource/")
 # Create Main project
 set(SOURCES
     ./src/main.cpp
+    ./src/foot.cpp
 )
 
 set(HEADERS
+    ./src/foot.hpp
     # main.h
 )
 

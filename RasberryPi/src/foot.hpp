@@ -1,0 +1,1 @@
+void motor(uint8_t motorNum);

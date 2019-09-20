@@ -6,11 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/hidetoniwa/Desktop/RasberryPi/src/main.cpp
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.cpp
+foot.hpp
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.hpp
+
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.hpp
+
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/main.cpp
 stdio.h
 -
 opencv2/opencv.hpp
 -
+foot.hpp
+/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/src/foot.hpp
 
 /usr/local/include/opencv4/opencv2/calib3d.hpp
 opencv2/core.hpp

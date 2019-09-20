@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_FLAGS =   -std=c++11
 
-CXX_DEFINES = -DRESOURCE_DIR=\"/home/hidetoniwa/Desktop/RasberryPi/build/resource/\"
+CXX_DEFINES = -DRESOURCE_DIR=\"/home/hidetoniwa/Desktop/raspi-tracer/RasberryPi/build/resource/\"
 
 CXX_INCLUDES = -isystem /usr/local/include/opencv4 
 
