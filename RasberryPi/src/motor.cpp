@@ -26,9 +26,11 @@ void motor::setPower(int8_t motorPower){
         softPwmWrite(pin[0],0);
         softPwmWrite(pin[1],0);
     }else if(motorPower>0){
-
+        softPwmWrite(pin[0],0);
+        softPwmWrite(pin[1],motorPower);
     }else if(motorPower<0){
-        motorPower=-motorPower;
+        softPwmWrite(pin[0],-motorPower);
+        softPwmWrite(pin[1],0);
     }
 }
 
