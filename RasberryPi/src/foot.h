@@ -2,8 +2,9 @@
 class foot
 {
 private:
+
 public:
-    foot();
+    foot(void);
     void out(float x, float y, float theta);
     ~foot(void);
 };

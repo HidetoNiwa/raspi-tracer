@@ -1,6 +1,6 @@
 add_definitions(-std=c++11)
 # OpenCVのパッケージを探す
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 project(MyOpenCVProject)
 
 # Copy resouce
@@ -9,16 +9,16 @@ add_definitions(-DRESOURCE_DIR="${PROJECT_BINARY_DIR}/resource/")
 
 # Create Main project
 set(SOURCES
-    ./src/main.cpp
     ./src/foot.cpp
+    ./src/main.cpp
     ./src/motor.cpp
 )
 
 set(HEADERS
-    ./src/includes.h
     ./src/foot.h
+    ./src/main.h
+    ./src/includes.h
     ./src/motor.h
-    # main.h
 )
 
 add_executable(Main
@@ -31,3 +31,4 @@ if(OpenCV_FOUND)
     target_include_directories(Main PUBLIC ${OpenCV_INCLUDE_DIRS})
     target_link_libraries(Main ${OpenCV_LIBS})
 endif()
+target_link_libraries(Main wiringPi)
