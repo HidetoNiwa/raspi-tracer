@@ -4,7 +4,8 @@
 #include "approx.h"
 
 #define MAX_POWER 100
-#define PLOTS 15
+#define PLOTS 150
 #define CENTOR_B 320
-#define P_Y 0.06
-#define P_THETA -20
+#define P_Y 0.05
+#define D_Y 0.001
+#define P_THETA 25
