@@ -22,12 +22,15 @@ int main(int argh, char* argv[])
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
 
     //motor初期状態定義
-    vector(0,0,0);
+    //vector(0,0,0);
 
     cv::Mat frame; //取得したフレーム
     uint16_t def_y=480/(PLOTS+1);
     while(cap.read(frame))//無限ループ
     {
+
+        linearApprox lin;
+
         cv::cvtColor(frame, frame,cv::COLOR_RGB2GRAY);
         cv::threshold(frame, frame, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
 
@@ -54,14 +57,35 @@ int main(int argh, char* argv[])
             }
             y=y+def_y;
             centor[i]=(l[i]+r[i])/2;
-            printf("%d,%d\t",y,centor[i]);
+            lin.add(y,centor[i]);
+            //printf("%d,%d\t",y,centor[i]);
         }
-
-        printf("\n");
-
-        vector(0,0,1000);
-
-        cv::imshow("win", frame);//画像を表示．
+	float b=lin.getB();
+	float a=lin.getA();
+        printf("y=%fx+%f\t%d\n",a,b,lin.getN());
+	float dify=lin.getB()-CENTOR_B;
+	float outY=dify*P_Y;
+	float outTHETA=a*P_THETA;
+	float outX;
+	if((outY>2)||(outTHETA>2)){
+		outX=0;
+	}else{
+		outX=4;
+	}
+        //vector(7,(int)outY*1.5,(int)outTHETA+outY);
+	vector(outX,(int)outY,(int)(outTHETA-(outY*2)));
+	cv::imshow("Lune",frame);
+/*
+	for(uint8_t i=0;i<4;i++){
+		w[i].setPower(-50);
+        printf("%d\n",-i);
+        delay(1000);
+        w[i].setPower(50);
+        printf("%d\n",i);
+        delay(1000);
+        w[i].setPower(0);
+	}
+*/
         const int key = cv::waitKey(1);
         if(key == 'q'/*113*/)//qボタンが押されたとき
         {
@@ -72,13 +96,15 @@ int main(int argh, char* argv[])
             //フレーム画像を保存する．
             cv::imwrite("img.png", frame);
         }
-        
+
     }
     cv::destroyAllWindows();
     return 0;
 }
 
 void vector(int x,int y ,int theta){
+    //theta=-theta;
+    x=-x;
     int vector[4]={0};
     vector[0]=-x+y+theta;
     vector[1]=x+y-theta;
@@ -89,18 +115,19 @@ void vector(int x,int y ,int theta){
 
     for(int8_t i=0;i<4;i++){
         if(abs(vector[i])>max){
-            max=vector[i];
+            max=abs(vector[i]);
         }
     }
 
-    //printf("MAX:%d\t",max);
+    printf("MAX:%d\t",max);
     for(uint8_t i=0;i<4;i++){
         if(max>MAX_POWER){
             vector[i]=vector[i]*MAX_POWER/max;
         }
         w[i].setPower(int8_t(vector[i]));
-        //printf("i%d:%d\t",i,vector[i]);
+        printf("i%d:%d\t",i,vector[i]);
     }
-    //printf("\n");
+    printf("\n");
 
 }
+

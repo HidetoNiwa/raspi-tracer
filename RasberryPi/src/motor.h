@@ -13,6 +13,6 @@ private:
 public:
     motor(uint8_t motorNum);
     void setPID(float p, float i, float d);
-    void setPower(int8_t motorPower);
+    void setPower(int motorPower);
     ~motor();
 };
