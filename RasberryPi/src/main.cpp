@@ -20,36 +20,29 @@ int main(int argh, char* argv[])
         //読み込みに失敗したときの処理
         return -1;
     }
-    cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, WIDTH_);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, HIGH_);
 
     //motor初期状態定義
     vectors(0,0,0);
-
+    float bef_a=0;
     cv::Mat frame; //取得したフレーム
-    uint16_t def_y=480/(PLOTS+1);
+    uint16_t def_y=HIGH_/(PLOTS+1);
     while(cap.read(frame))//無限ループ
     {
 
         linearApprox lin;
 	GaussianBlur(frame,frame,Size(3,3),0);
         cvtColor(frame, frame,cv::COLOR_RGB2GRAY);
-        //adaptiveThreshold(frame,frame, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 7, 8);
-	threshold(frame, frame, 0, 255, THRESH_BINARY | THRESH_OTSU);
-	/*
-	int threshold_type = atoi(argv[2]) ?THRESH_BINARY : THRESH_BINARY_INV;
-	int adaptive_method = atoi(argv[3]) ?ADAPTIVE_THRESH_MEAN_C : ADAPTIVE_THRESH_GAUSSIAN_C;
-	int block_size =atoi (argv[4]);
-	double offset = (double)atof(argv[5]);
-	adaptiveThreshold(frame, frame, 255, adaptive_method,threshold_type, block_size, offset);
-	*/
+       	threshold(frame, frame, 0, 255, THRESH_BINARY | THRESH_OTSU);
+
 	uint16_t y=def_y;
-        uint16_t l[PLOTS]={640};
-        uint16_t r[PLOTS]={640};
+        uint16_t l[PLOTS]={WIDTH_};
+        uint16_t r[PLOTS]={WIDTH_};
         uint16_t centor[PLOTS]={0};
 
         for(uint8_t i=0;i<PLOTS;i++){
-	    for(uint16_t x=0;x<640;x++){
+	    for(uint16_t x=0;x<WIDTH_ ;x++){
                 if(0 != frame.at<unsigned char>(y, x)){
                     uint8_t count=0;
 		    for(uint8_t j=0;j<21;j++){
@@ -63,7 +56,7 @@ int main(int argh, char* argv[])
                     break;
             	}
             }
-            for(uint16_t x=639;x>l[i]+50;x--){
+            for(uint16_t x=WIDTH_-1;x>l[i]+50;x--){
                 if(0 != frame.at<unsigned char>(y, x)){
                     uint8_t count=0;
                     for(uint8_t j=0;j<21;j++){
@@ -79,9 +72,9 @@ int main(int argh, char* argv[])
             }
             y=y+def_y;
             centor[i]=(l[i]+r[i])/2;
-	    if((l[i]<630)&&(r[i]>10)){
+	    if((l[i]<(int)(WIDTH_*0.98f))&&(r[i]>10)){
             	lin.add(y,centor[i]);
-		circle(frame, Point(centor[i],y), 20, Scalar(200,200,200), 1, 8);
+		circle(frame, Point(centor[i],y), 10, Scalar(200,200,200), 1, 8);
 	    }
             //printf("%d,%d\t",y,centor[i]);
         }
@@ -90,31 +83,40 @@ int main(int argh, char* argv[])
         printf("y=%fx+%f\t%d\n",a,b,lin.getN());
 	float dify=lin.getB()-CENTOR_B;
 	float outY=dify*P_Y;
-	float outTHETA=a*a*P_THETA;
-	if(outTHETA>14){
-		outTHETA=14;
+	float outTHETA=a*P_THETA+D_THETA*(a-bef_a)+dify*P_B;
+
+
+	float max_f=9;
+	if(outTHETA>max_f){
+		outY=8;
+		outTHETA=max_f;
+	}else if(outTHETA<-max_f){
+		outY=-8;
+		outTHETA=-max_f;
 	}
 	float outX;
-	if((outY>2)||(outTHETA>2)){
-		outX=2;
+
+	float max_X=28;
+	if(outTHETA<0){
+		outTHETA=outTHETA*1;
+	}
+	if(abs(outTHETA)>4){
+		outX=0;
+		outY=outY*1.2;
 	}else{
-		outX=8;
+		outX=abs(max_X-abs(outTHETA)*10);
 	}
-        //vector(7,(int)outY*1.5,(int)outTHETA+outY);
+	if(lin.getN()<10){
+		outX=4;
+		outY=0;
+		outTHETA=1;
+	}
 	vectors(outX,(int)outY,(int)(outTHETA));
-	cv::line(frame, cv::Point(b,0), cv::Point(480*a+b, 480), cv::Scalar(0,0,0), 3, 4);
+
+	bef_a=a;
+	cv::line(frame, cv::Point(b,0), cv::Point(HIGH_*a+b, HIGH_), cv::Scalar(0,0,0), 3, 4);
 	cv::imshow("Lune",frame);
-/*
-	for(uint8_t i=0;i<4;i++){
-		w[i].setPower(-50);
-        printf("%d\n",-i);
-        delay(1000);
-        w[i].setPower(50);
-        printf("%d\n",i);
-        delay(1000);
-        w[i].setPower(0);
-	}
-*/
+
         const int key = cv::waitKey(1);
         if(key == 'q'/*113*/)//qボタンが押されたとき
         {
@@ -135,6 +137,7 @@ int main(int argh, char* argv[])
 void vectors(int x,int y ,int theta){
     //theta=-theta;
     x=-x;
+    printf("x:%d\ty:%d\tTHETA:%d\n",x,y,theta);
     int vector[4]={0};
     vector[0]=-x+y+theta;
     vector[1]=x+y-theta;
@@ -148,16 +151,11 @@ void vectors(int x,int y ,int theta){
             max=abs(vector[i]);
         }
     }
-
-    printf("MAX:%d\t",max);
-    for(uint8_t i=0;i<4;i++){
+   for(uint8_t i=0;i<4;i++){
         if(max>MAX_POWER){
             vector[i]=vector[i]*MAX_POWER/max;
         }
         w[i].setPower(int8_t(vector[i]));
-        printf("i%d:%d\t",i,vector[i]);
+        //printf("i%d:%d\t",i,vector[i]);
     }
-    printf("\n");
-
 }
-

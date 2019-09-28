@@ -8,7 +8,7 @@ motor::motor(uint8_t motorNum)
         pin[0]=3;
         pin[1]=4;
     }else if(motorNum==1){
-        pin[0]=5;
+        pin[0]=2;
         pin[1]=6;
     }else if(motorNum==2){
         pin[0]=7;
