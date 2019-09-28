@@ -86,17 +86,17 @@ int main(int argh, char* argv[])
 	float outTHETA=a*P_THETA+D_THETA*(a-bef_a)+dify*P_B;
 
 
-	float max_f=9;
+	float max_f=10;
 	if(outTHETA>max_f){
-		outY=8;
+		outY=11;
 		outTHETA=max_f;
 	}else if(outTHETA<-max_f){
-		outY=-8;
+		outY=-11;
 		outTHETA=-max_f;
 	}
 	float outX;
 
-	float max_X=28;
+	float max_X=29;
 	if(outTHETA<0){
 		outTHETA=outTHETA*1;
 	}
